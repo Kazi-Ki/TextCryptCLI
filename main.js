@@ -2,6 +2,7 @@ const outputEl = document.getElementById('output');
 const cmdForm = document.getElementById('cmdForm');
 const cmdInput = document.getElementById('cmdInput');
 const modeSelect = document.getElementById('modeSelect');
+const methodSelect = document.getElementById('methodSelect');
 
 // 出力関数
 function printOutput(text, isCommand = false) {
@@ -55,30 +56,27 @@ cmdForm.addEventListener('submit', async (e) => {
   e.preventDefault();
 
   const mode = modeSelect.value;
+  const method = methodSelect.value;
   const input = cmdInput.value.trim();
   if (!input) return;
 
   printOutput(input, true);
 
-  const [methodRaw, ...rest] = input.split(' ');
-  const method = methodRaw.toLowerCase();
-  const text = rest.join(' ');
-
   try {
     if (mode === 'encode') {
       switch (method) {
         case 'base64':
-          printOutput('Base64 → ' + btoa(text));
+          printOutput('Base64 → ' + btoa(input));
           break;
         case 'caesar':
-          printOutput('Caesar(13) → ' + caesar(text));
+          printOutput('Caesar(13) → ' + caesar(input));
           break;
         case 'sha256':
-          const hashed = await sha256(text);
+          const hashed = await sha256(input);
           printOutput('SHA-256 → ' + hashed);
           break;
         case 'sjis':
-          printOutput('SJIS風文字化け → ' + fakeShiftJIS(text));
+          printOutput('SJIS風文字化け → ' + fakeShiftJIS(input));
           break;
         default:
           printOutput(`❓ 未対応のエンコード方式: ${method}`);
@@ -86,10 +84,14 @@ cmdForm.addEventListener('submit', async (e) => {
     } else if (mode === 'decode') {
       switch (method) {
         case 'base64':
-          printOutput('Base64復号 → ' + atob(text));
+          try {
+            printOutput('Base64復号 → ' + atob(input));
+          } catch {
+            printOutput('⚠️ Base64の形式が正しくありません');
+          }
           break;
         case 'caesar':
-          printOutput('Caesar復号 → ' + caesar(text, -13));
+          printOutput('Caesar復号 → ' + caesar(input, -13));
           break;
         default:
           printOutput(`❓ 未対応のデコード方式: ${method}`);
@@ -97,7 +99,7 @@ cmdForm.addEventListener('submit', async (e) => {
     } else if (mode === 'analyze') {
       printOutput(analyzeText(input));
     } else {
-      printOutput('❗ モードが不明です');
+      printOutput('❗ 不明なモードです');
     }
   } catch (err) {
     printOutput('⚠️ エラー: ' + err.message);
