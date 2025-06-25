@@ -122,3 +122,20 @@ html, body {
 #infoArea a:hover {
   text-decoration: underline;
 }
+
+#copyBtn {
+  background: #222;
+  color: #eee;
+  border: 1px solid #555;
+  padding: 4px 12px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 0;
+  transition: background 0.3s, border-color 0.3s;
+  font-size: 0.9rem;
+}
+
+#copyBtn:hover {
+  background: #444;
+  border-color: #0f0;
+}
