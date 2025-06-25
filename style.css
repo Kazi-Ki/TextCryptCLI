@@ -8,15 +8,17 @@ html, body {
 }
 
 /* コンテナ */
+
 #app {
   display: flex;
   flex-direction: column;
   width: 100vw;
   height: 100vh;
-  padding: 20px;
+  padding: 40px 20px 20px 20px; 
   box-sizing: border-box;
   background: rgba(10,10,10,0.85);
 }
+
 
 /* ヘッダー */
 #header {
