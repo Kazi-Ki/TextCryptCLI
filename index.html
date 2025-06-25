@@ -11,18 +11,25 @@
     <div id="header">TextCryptCLI - 文字列暗号化＆解析ツール</div>
 
     <div id="output" tabindex="0" aria-live="polite"></div>
-    <form id="cmdForm" autocomplete="off">
+     <form id="cmdForm" autocomplete="off" style="display:flex; gap:10px; flex-wrap:wrap;">
   <select id="modeSelect" aria-label="モード選択">
     <option value="encode">エンコード</option>
     <option value="decode">デコード</option>
     <option value="analyze">解析</option>
   </select>
 
+  <select id="methodSelect" aria-label="手法選択">
+    <option value="base64">Base64</option>
+    <option value="caesar">Caesar暗号</option>
+    <option value="sha256">SHA-256</option>
+    <option value="sjis">SJIS風文字化け</option>
+  </select>
+
   <input
     type="text"
     id="cmdInput"
-    placeholder="例: base64 Hello world!"
-    aria-label="入力"
+    placeholder="ここに文字列を入力"
+    aria-label="対象文字列"
     spellcheck="false"
     autocomplete="off"
     autofocus
