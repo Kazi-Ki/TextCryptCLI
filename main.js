@@ -35,6 +35,24 @@ function fakeShiftJIS(text) {
     .join(' ');
 }
 
+// バイトシフト暗号（日本語対応）
+function byteShiftEncode(str, shift = 1) {
+  const encoder = new TextEncoder();
+  const bytes = encoder.encode(str);
+  const shifted = bytes.map(b => (b + shift) & 0xFF);
+  return Array.from(shifted).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+function byteShiftDecode(hexStr, shift = 1) {
+  const bytes = [];
+  for(let i = 0; i < hexStr.length; i += 2) {
+    bytes.push(parseInt(hexStr.substr(i, 2), 16));
+  }
+  const shiftedBack = bytes.map(b => (b - shift + 256) & 0xFF);
+  const decoder = new TextDecoder();
+  return decoder.decode(new Uint8Array(shiftedBack));
+}
+
 // 解析モード
 function analyzeText(text) {
   const stats = {
@@ -78,6 +96,9 @@ cmdForm.addEventListener('submit', async (e) => {
         case 'sjis':
           printOutput('SJIS風文字化け → ' + fakeShiftJIS(input));
           break;
+        case 'byteshift':
+          printOutput('ByteShift → ' + byteShiftEncode(input));
+          break;
         default:
           printOutput(`❓ 未対応のエンコード方式: ${method}`);
       }
@@ -92,6 +113,13 @@ cmdForm.addEventListener('submit', async (e) => {
           break;
         case 'caesar':
           printOutput('Caesar復号 → ' + caesar(input, -13));
+          break;
+        case 'byteshift':
+          try {
+            printOutput('ByteShift復号 → ' + byteShiftDecode(input));
+          } catch {
+            printOutput('⚠️ ByteShift形式が正しくありません');
+          }
           break;
         default:
           printOutput(`❓ 未対応のデコード方式: ${method}`);
