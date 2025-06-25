@@ -11,30 +11,25 @@
     <div id="header">TextCryptCLI - 文字列暗号化＆解析ツール</div>
 
     <div id="output" tabindex="0" aria-live="polite"></div>
-
     <form id="cmdForm" autocomplete="off">
-      <input
-        type="text"
-        id="cmdInput"
-        placeholder="ここに文字列を入力"
-        aria-label="入力文字列"
-        spellcheck="false"
-        autocomplete="off"
-        autofocus
-        style="flex-grow:1; font-family: monospace; font-size:1.2rem; padding: 8px 12px; background:#111; color:#eee; border:none; outline:none; box-shadow: inset 0 0 8px #000; border-radius: 0;"
-      />
+  <select id="modeSelect" aria-label="モード選択">
+    <option value="encode">エンコード</option>
+    <option value="decode">デコード</option>
+    <option value="analyze">解析</option>
+  </select>
 
-      <select id="modeSelect" aria-label="処理モード選択">
-        <option value="" disabled selected>処理モードを選択</option>
-        <option value="base64encode">Base64エンコード</option>
-        <option value="base64decode">Base64デコード</option>
-        <option value="caesar13">Caesar暗号 (13文字ずらし)</option>
-        <option value="sha256">SHA-256ハッシュ化</option>
-        <option value="toShiftJISFake">文字化け風変換 (UTF-8→SJIS風)</option>
-      </select>
-
-      <button type="submit">送信</button>
-    </form>
+  <input
+    type="text"
+    id="cmdInput"
+    placeholder="例: base64 Hello world!"
+    aria-label="入力"
+    spellcheck="false"
+    autocomplete="off"
+    autofocus
+    style="flex-grow:1; font-family: monospace; font-size:1.2rem; padding: 8px 12px; background:#111; color:#eee; border:none; outline:none; box-shadow: inset 0 0 8px #000; border-radius: 0;"
+  />
+  <button type="submit">送信</button>
+</form>
 
     <div id="infoArea">
       <small>これはローカルで動作するテキスト暗号/復号ツールです。</small>
