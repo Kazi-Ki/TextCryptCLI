@@ -8,7 +8,12 @@
 </head>
 <body>
   <div id="app" role="main" aria-label="TextCryptCLI">
-    <div id="header">TextCryptCLI - 文字列暗号化＆解析ツール</div>
+    <div id="header">TextCryptCLI - 文字列暗号化＆解析</div>
+    <div id="copyContainer" style="text-align:right; margin-bottom:4px;">
+      <button id="copyBtn" title="結果をコピー">📋 Copy</button>
+
+  </div>
+<pre id="output" aria-live="polite"></pre>
 
     <div id="output" tabindex="0" aria-live="polite"></div>
      <form id="cmdForm" autocomplete="off" style="display:flex; gap:10px; flex-wrap:wrap;">
