@@ -3,6 +3,7 @@ const cmdForm = document.getElementById('cmdForm');
 const cmdInput = document.getElementById('cmdInput');
 const modeSelect = document.getElementById('modeSelect');
 const methodSelect = document.getElementById('methodSelect');
+const copyBtn = document.getElementById('copyBtn');
 
 // 出力関数
 function printOutput(text, isCommand = false) {
@@ -136,18 +137,22 @@ cmdForm.addEventListener('submit', async (e) => {
   cmdInput.value = '';
 });
 
-//コピー操作
-const copyBtn = document.getElementById('copyBtn');
+// コピー機能
 copyBtn.addEventListener('click', () => {
-  if (!outputEl.textContent.trim()) {
+  const text = outputEl.textContent.trim();
+  if (!text) {
     alert('コピーする内容がありません');
     return;
   }
-  navigator.clipboard.writeText(outputEl.textContent)
+
+  navigator.clipboard.writeText(text)
     .then(() => {
       copyBtn.textContent = '✅ コピー完了';
-      setTimeout(() => copyBtn.textContent = '📋 Copy', 1500);
+      setTimeout(() => {
+        copyBtn.textContent = '📋 Copy';
+      }, 1500);
     })
-    .catch(() => alert('コピーに失敗しました'));
+    .catch(() => {
+      alert('コピーに失敗しました');
+    });
 });
-
