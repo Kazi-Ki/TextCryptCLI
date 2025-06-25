@@ -1,0 +1,119 @@
+/* 全体リセット＆全画面レイアウト */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: #111;
+  color: #eee;
+  font-family: 'Courier New', monospace;
+  overflow: hidden;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+  background: rgba(10, 10, 10, 0.85);
+}
+
+#header {
+  font-weight: bold;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  user-select: none;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+#output {
+  background: rgba(0, 0, 0, 0.7);
+  flex-grow: 1;
+  padding: 12px;
+  overflow-y: auto;
+  font-size: 1.1rem;
+  line-height: 1.4;
+  white-space: pre-wrap;
+  color: #eee;
+  border: none;
+  border-radius: 0;
+  outline: none;
+}
+
+/* コマンド入力エリア */
+#cmdForm {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  width: 100%;
+  padding-top: 12px;
+  margin-top: 12px;
+  border-top: 2px solid #444;
+}
+
+/* プルダウンメニュー（モード選択） */
+#modeSelect {
+  font-family: monospace;
+  font-size: 1.1rem;
+  padding: 8px 12px;
+  background: #111;
+  color: #eee;
+  border: none;
+  outline: none;
+  box-shadow: inset 0 0 8px #000;
+  border-radius: 0;
+  cursor: pointer;
+  max-width: 150px;
+}
+
+/* 入力欄（コマンド） */
+#cmdInput {
+  flex-grow: 1;
+  font-family: monospace;
+  font-size: 1.2rem;
+  padding: 8px 12px;
+  background: #111;
+  color: #eee;
+  border: none;
+  outline: none;
+  box-shadow: inset 0 0 8px #000;
+  border-radius: 0;
+}
+
+/* 送信ボタン */
+#cmdForm button {
+  background: #222;
+  color: #eee;
+  border: 1px solid #555;
+  padding: 8px 20px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 0;
+  transition: background 0.3s, border-color 0.3s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+#cmdForm button:hover {
+  background: #444;
+  border-color: #0f0;
+}
+
+/* フッター情報 */
+#infoArea {
+  margin-top: 8px;
+  font-size: 0.8rem;
+  text-align: center;
+  user-select: none;
+}
+
+#infoArea a {
+  color: #6cf;
+  text-decoration: none;
+}
+
+#infoArea a:hover {
+  text-decoration: underline;
+}
