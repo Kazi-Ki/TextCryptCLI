@@ -135,3 +135,19 @@ cmdForm.addEventListener('submit', async (e) => {
 
   cmdInput.value = '';
 });
+
+//コピー操作
+const copyBtn = document.getElementById('copyBtn');
+copyBtn.addEventListener('click', () => {
+  if (!outputEl.textContent.trim()) {
+    alert('コピーする内容がありません');
+    return;
+  }
+  navigator.clipboard.writeText(outputEl.textContent)
+    .then(() => {
+      copyBtn.textContent = '✅ コピー完了';
+      setTimeout(() => copyBtn.textContent = '📋 Copy', 1500);
+    })
+    .catch(() => alert('コピーに失敗しました'));
+});
+
